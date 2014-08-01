@@ -15,6 +15,7 @@ Work in progress. For now, not on Atmosphere. Put this in the packages section o
   "branch": "master"
 }
 ```
+And then run `mrt add cfs-autoform`
 
 ## Prerequisites
 
