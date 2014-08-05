@@ -19,7 +19,7 @@ And then run `mrt add cfs-autoform`
 
 ## Prerequisites
 
-Add `autoform` and `collectionFS` packages to your app. Also add any other CFS packages you need, particularly a storage adapter package.
+Add `collection2`, `autoform`, and `collectionFS` packages to your app. Also add any other CFS packages you need, particularly a storage adapter package.
 
 ## Example
 
