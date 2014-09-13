@@ -1,4 +1,4 @@
-cfs-autoform
+cfs:autoform
 =========================
 
 WORK IN PROGRESS
@@ -7,23 +7,19 @@ A smart package for Meteor that provides a file UI component for use within an a
 
 ## Installation
 
-Work in progress. For now, not on Atmosphere. Put this in the packages section of your smart.json:
+In a Meteor app directory, enter:
 
 ```
-"cfs-autoform": {
-  "git": "https://github.com/aldeed/meteor-cfs-autoform",
-  "branch": "master"
-}
+$ meteor add cfs:autoform
 ```
-And then run `mrt add cfs-autoform`
 
 ## Prerequisites
 
-Add `collection2`, `autoform`, and `collectionFS` packages to your app. Also add any other CFS packages you need, particularly a storage adapter package.
+Add `aldeed:collection2`, `aldeed:autoform`, and `cfs:standard-packages` packages to your app. Also add any other CFS packages you need, particularly a storage adapter package such as `cfs:gridfs`.
 
 ## Example
 
-*Assumption: autopublish, insecure, and cfs-gridfs packages are in use*
+*Assumption: autopublish, insecure, and cfs:gridfs packages are in use*
 
 *common.js*
 

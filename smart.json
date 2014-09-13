@@ -1,9 +1,9 @@
 {
-  "name": "cfs-autoform",
+  "name": "cfs:autoform",
   "description": "Upload files as part of autoform submission",
   "homepage": "https://github.com/aldeed/meteor-cfs-autoform",
   "author": "Eric Dobbertin (http://dairystatedesigns.com)",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "git": "https://github.com/aldeed/meteor-cfs-autoform.git",
   "packages": {
     "autoform": {},
