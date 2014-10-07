@@ -1,43 +1,63 @@
 if (Meteor.isClient) {
-  Template.cfsFileField.helpers({
-    qfAtts: function () {
-      var atts = _.clone(this);
-      atts.type = "text";
-      atts.readonly = true;
-      var defaultPlaceholder = atts.multiple ? "Click to upload files or drop them here" : "Click to upload a file or drop it here";
-      atts.placeholder = atts.placeholder || defaultPlaceholder;
-      atts["class"] = atts["class"] || "";
-      atts["class"] = atts["class"] + " cfsaf_field";
-      delete atts.collection;
-      delete atts.multiple;
-      return atts;
+
+  AutoForm.addInputType("cfs-file", {
+    componentName:"cfsFileField",
+    valueOut: {
+      selector: 'input.cfsaf-file-field',
+      get: function () {
+        return "dummyId";
+      }
     },
-    inputAtts: function () {
-      var self = this;
-      return {
-        type: "file",
-        "data-cfs-schema-key": self.name,
-        "data-cfs-collection": self.collection,
-        multiple: self.multiple
-      };
+    contextAdjust: function (context) {
+      context.atts.placeholder = context.atts.placeholder || "Click to upload a file or drop it here";
+      context.atts["class"] = (context.atts["class"] || "") + " cfsaf-field";
+      return context;
     }
   });
 
-  function findAFData() {
-    var i = 1, af;
-    do {
-      af = UI._parentData(i);
-      i++;
-    } while (af && !af._af);
-    return af ? af._af : null;
+  AutoForm.addInputType("cfs-files", {
+    componentName:"cfsFilesField",
+    valueIsArray: true,
+    valueOut: {
+      selector: 'input.cfsaf-files-field',
+      get: function () {
+        return ["dummyId"];
+      }
+    },
+    contextAdjust: function (context) {
+      context.atts.placeholder = context.atts.placeholder || "Click to upload files or drop them here";
+      context.atts["class"] = (context.atts["class"] || "") + " cfsaf-field";
+      return context;
+    }
+  });
+
+  function textInputAtts() {
+    var atts = _.clone(this.atts);
+    delete atts.collection;
+    // we want the schema key tied to the hidden file field only
+    delete atts["data-schema-key"];
+    atts["class"] = (atts["class"] || "") + " form-control";
+    return atts;
   }
 
+  function fileInputAtts() {
+    return {'data-schema-key': this.atts["data-schema-key"]};
+  }
+
+  Template["cfsFileField_bootstrap3"].helpers({
+    textInputAtts: textInputAtts,
+    fileInputAtts: fileInputAtts
+  });
+
+  Template["cfsFilesField_bootstrap3"].helpers({
+    textInputAtts: textInputAtts,
+    fileInputAtts: fileInputAtts
+  });
+
   var hookTracking = {};
-  Template.cfsFileField.rendered = function () {
-    var d = findAFData();
-    if (!d) {
-      throw new Error("cfsFileField must be used within an autoForm block");
-    }
+  Template["cfsFileField_bootstrap3"].rendered = 
+  Template["cfsFilesField_bootstrap3"].rendered = function () {
+    var d = AutoForm.find();
     // By adding hooks dynamically on render, hopefully any user hooks will have
     // been added before so we won't disrupt expected behavior.
     var formId = d.formId;
@@ -52,22 +72,30 @@ if (Meteor.isClient) {
     FS.Utility.eachFile(event, function (f) {
       fileList.push(f.name);
     });
-    template.$('[data-schema-key]').val(fileList.join(", "));
+    template.$('.cfsaf-field').val(fileList.join(", "));
     var fileList = event.originalEvent.dataTransfer ? event.originalEvent.dataTransfer.files : event.currentTarget.files;
     // Store the FileList on the file input for later
-    $('[data-cfs-schema-key]').data("cfsaf_files", fileList);
+    template.$('.cfsaf-hidden').data("cfsaf_files", fileList);
   };
 
-  Template.cfsFileField.events({
-    'click [data-schema-key]': function (event, template) {
-      template.$('[data-cfs-schema-key]').click();
+  Template["cfsFileField_bootstrap3"].events({
+    'click .cfsaf-field': function (event, template) {
+      template.$('.cfsaf-hidden').click();
     },
-    'change [data-cfs-schema-key]': handler,
-    'dropped [data-schema-key]': handler
+    'change .cfsaf-hidden': handler,
+    'dropped .cfsaf-field': handler
+  });
+
+  Template["cfsFilesField_bootstrap3"].events({
+    'click .cfsaf-field': function (event, template) {
+      template.$('.cfsaf-hidden').click();
+    },
+    'change .cfsaf-hidden': handler,
+    'dropped .cfsaf-field': handler
   });
 
   function deleteUploadedFiles(template) {
-    template.$('[data-cfs-schema-key]').each(function () {
+    template.$('.cfsaf-hidden').each(function () {
       var uploadedFiles = $(this).data("cfsaf_uploaded-files") || [];
       _.each(uploadedFiles, function (f) {
         f.remove();
@@ -88,13 +116,15 @@ if (Meteor.isClient) {
           }
 
           var totalFiles = 0;
-          template.$('[data-cfs-schema-key]').each(function () {
+          template.$('.cfsaf-hidden').each(function () {
             var elem = $(this);
             var files = elem.data("cfsaf_files");
             if (files) {
               totalFiles += files.length;
             }
-            var key = elem.attr("data-cfs-schema-key");
+
+            // delete the dummyId value
+            var key = elem.attr("data-schema-key");
             delete doc[key];
           });
 
@@ -109,21 +139,25 @@ if (Meteor.isClient) {
             if (error) {
               failedFiles++;
             } else {
+              // set real ID of uploaded file into the doc
               doc[key] = fileObj._id;
             }
             if (doneFiles === totalFiles) {
               if (failedFiles > 0) {
+                // if any failed, we delete all that succeeded
                 deleteUploadedFiles(template);
+                // pass back to autoform code, telling it we failed
                 self.result(false);
               } else {
+                // pass updated doc back to autoform code, telling it we succeeded
                 self.result(doc);
               }
             }
           }
 
-          template.$('[data-cfs-schema-key]').each(function () {
+          template.$('.cfsaf-hidden').each(function () {
             var elem = $(this);
-            var key = elem.attr("data-cfs-schema-key");
+            var key = elem.attr("data-schema-key");
             var fsCollectionName = elem.attr("data-cfs-collection");
             var files = elem.data("cfsaf_files");
             _.each(files, function (file) {
@@ -139,6 +173,7 @@ if (Meteor.isClient) {
               });
               FS._collections[fsCollectionName].insert(fileObj, function (error, fileObj) {
                 if (error) {
+                  // call callback if insert/upload failed
                   cb(error, fileObj, key);
                 }
                 // TODO progress bar during uploads
@@ -150,9 +185,11 @@ if (Meteor.isClient) {
       after: {
         // We add an after.insert hook to delete uploaded files if the doc insert fails.
         insert: function (error, result, template) {
-          var elems = template.$('[data-cfs-schema-key]');
+          var elems = template.$('.cfsaf-hidden');
           if (error) {
             deleteUploadedFiles(template);
+            if (FS.debug || AutoForm._debug)
+              console.log("There was an error inserting so all uploaded files were removed.", error);
           } else {
             // cleanup files data
             elems.removeData("cfsaf_files");

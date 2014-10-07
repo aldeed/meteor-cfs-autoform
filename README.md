@@ -1,8 +1,6 @@
 cfs:autoform
 =========================
 
-WORK IN PROGRESS
-
 A smart package for Meteor that provides a file UI component for use within an autoform. The UI component supports clicking to select files or dropping them. Once the full form is valid, the files are uploaded using CollectionFS. The form document is inserted only if the uploads are all successful. If the form document fails to insert on the server, the uploaded files are removed.
 
 ## Installation
@@ -14,6 +12,8 @@ $ meteor add cfs:autoform
 ```
 
 ## Prerequisites
+
+Requires Meteor 0.9.3+
 
 Add `aldeed:collection2`, `aldeed:autoform`, and `cfs:standard-packages` packages to your app. Also add any other CFS packages you need, particularly a storage adapter package such as `cfs:gridfs`.
 
@@ -30,8 +30,7 @@ Docs.attachSchema(new SimpleSchema({
     type: String
   },
   fileId: {
-    type: String,
-    label: "File"
+    type: String
   }
 }));
 
@@ -53,7 +52,7 @@ Files.allow({
 <template name="insertForm">
   {{#autoForm id="insertForm" type="insert" collection="Docs"}}
   {{> afQuickField name="name"}}
-  {{> cfsFileField name="fileId" collection="files"}}
+  {{> afQuickField name="fileId" type="cfs-file" collection="files"}}
   <button type="submit">Submit</button>
   {{/autoForm}}
 </template>
@@ -62,7 +61,8 @@ Files.allow({
 ## Notes
 
 * Only insert forms (`type="insert"`) are supported
-* The `collection` attribute for `cfsFileField` must be the same as the first argument you passed to the FS.Collection constructor.
+* Use `type="cfs-file"` to allow one file to be selected or dropped. Use `type="cfs-files"` to allow multiple files to be selected or dropped.
+* The `collection` attribute must be the same as the first argument you passed to the FS.Collection constructor.
 * Files are uploaded only after you click submit and the form is valid.
 * If file upload fails, the form document is not inserted.
 * If one file fails to upload, any other files from that form that did upload are deleted.
@@ -72,6 +72,5 @@ Files.allow({
 
 * Insert FS.File itself when using cfs-ejson-file package.
 * Display customizable progress bar template in place of each field while uploading.
-* Better template/component structure so that it does not have to be a quickField.
 
 [![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/aldeed/)

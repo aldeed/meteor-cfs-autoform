@@ -2,14 +2,18 @@
   "dependencies": [
     [
       "aldeed:autoform",
-      "2.0.1"
+      "4.0.0"
     ],
     [
       "aldeed:simple-schema",
-      "1.0.0"
+      "1.0.3"
     ],
     [
       "application-configuration",
+      "1.0.2"
+    ],
+    [
+      "base64",
       "1.0.0"
     ],
     [
@@ -18,10 +22,14 @@
     ],
     [
       "blaze",
-      "2.0.0"
+      "2.0.1"
     ],
     [
       "blaze-tools",
+      "1.0.0"
+    ],
+    [
+      "boilerplate-generator",
       "1.0.0"
     ],
     [
@@ -38,7 +46,7 @@
     ],
     [
       "cfs:collection",
-      "0.0.0"
+      "0.0.1"
     ],
     [
       "cfs:collection-filters",
@@ -94,23 +102,23 @@
     ],
     [
       "check",
-      "1.0.0"
-    ],
-    [
-      "ddp",
-      "1.0.1-ekate"
-    ],
-    [
-      "deps",
-      "1.0.2"
-    ],
-    [
-      "ejson",
       "1.0.1"
     ],
     [
+      "ddp",
+      "1.0.9"
+    ],
+    [
+      "deps",
+      "1.0.4"
+    ],
+    [
+      "ejson",
+      "1.0.3"
+    ],
+    [
       "follower-livedata",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "geojson-utils",
@@ -118,15 +126,15 @@
     ],
     [
       "html-tools",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "htmljs",
-      "1.0.0-cordova1"
+      "1.0.1"
     ],
     [
       "http",
-      "1.0.4"
+      "1.0.6"
     ],
     [
       "id-map",
@@ -142,31 +150,31 @@
     ],
     [
       "livedata",
-      "1.0.8"
+      "1.0.10"
     ],
     [
       "logging",
-      "1.0.0"
-    ],
-    [
-      "meteor",
       "1.0.3"
     ],
     [
+      "meteor",
+      "1.1.1"
+    ],
+    [
       "minifiers",
-      "1.0.0"
+      "1.1.0"
     ],
     [
       "minimongo",
-      "1.0.0"
+      "1.0.3"
     ],
     [
       "mongo",
-      "1.0.4-rc0"
+      "1.0.6"
     ],
     [
       "mongo-livedata",
-      "1.0.4"
+      "1.0.5"
     ],
     [
       "mrt:moment",
@@ -174,7 +182,7 @@
     ],
     [
       "observe-sequence",
-      "1.0.0"
+      "1.0.2"
     ],
     [
       "ordered-dict",
@@ -194,7 +202,7 @@
     ],
     [
       "reactive-var",
-      "1.0.1-rc0"
+      "1.0.2"
     ],
     [
       "retry",
@@ -202,38 +210,46 @@
     ],
     [
       "routepolicy",
-      "1.0.0-cordova1"
+      "1.0.1"
     ],
     [
       "spacebars",
-      "1.0.1-rc0"
+      "1.0.2"
     ],
     [
       "spacebars-compiler",
-      "1.0.0"
+      "1.0.2"
     ],
     [
       "templating",
-      "1.0.5"
+      "1.0.7"
     ],
     [
       "tracker",
-      "1.0.2-rc0"
+      "1.0.2"
     ],
     [
       "ui",
-      "1.0.1"
+      "1.0.3"
     ],
     [
       "underscore",
       "1.0.0"
     ],
     [
+      "url",
+      "1.0.0"
+    ],
+    [
       "webapp",
-      "1.0.3"
+      "1.1.2"
+    ],
+    [
+      "webapp-hashing",
+      "1.0.0"
     ]
   ],
   "pluginDependencies": [],
-  "toolVersion": "meteor-tool@1.0.28",
+  "toolVersion": "meteor-tool@1.0.33",
   "format": "1.0"
 }

@@ -1,4 +1,9 @@
-<template name="cfsFileField">
-  <input type="file" class="cfsaf_hidden" {{inputAtts}}>
-  {{> afQuickField qfAtts}}
+<template name="cfsFileField_bootstrap3">
+  <input type="file" class="cfsaf-hidden cfsaf-file-field" data-cfs-collection="{{this.atts.collection}}" {{fileInputAtts}}>
+  <input type="text" readonly {{textInputAtts}}>
+</template>
+
+<template name="cfsFilesField_bootstrap3">
+  <input type="file" class="cfsaf-hidden cfsaf-files-field" multiple data-cfs-collection="{{this.atts.collection}}" {{fileInputAtts}}>
+  <input type="text" readonly {{textInputAtts}}>
 </template>
