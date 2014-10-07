@@ -2,7 +2,7 @@
   "dependencies": [
     [
       "aldeed:autoform",
-      "4.0.0"
+      "4.0.0-rc1"
     ],
     [
       "aldeed:simple-schema",
