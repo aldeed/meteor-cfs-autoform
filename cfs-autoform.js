@@ -2,12 +2,9 @@ if (Meteor.isClient) {
 
   // Adds a custom "cfs-file" input type that AutoForm will recognize
   AutoForm.addInputType("cfs-file", {
-    componentName:"cfsFileField",
-    valueOut: {
-      selector: 'input.cfsaf-file-field',
-      get: function () {
-        return "dummyId";
-      }
+    template:"cfsFileField",
+    valueOut: function () {
+      return "dummyId";
     },
     contextAdjust: function (context) {
       context.atts.placeholder = context.atts.placeholder || "Click to upload a file or drop it here";
@@ -18,13 +15,10 @@ if (Meteor.isClient) {
 
   // Adds a custom "cfs-files" input type that AutoForm will recognize
   AutoForm.addInputType("cfs-files", {
-    componentName:"cfsFilesField",
+    template:"cfsFilesField",
     valueIsArray: true,
-    valueOut: {
-      selector: 'input.cfsaf-files-field',
-      get: function () {
-        return ["dummyId"];
-      }
+    valueOut: function () {
+      return ["dummyId"];
     },
     contextAdjust: function (context) {
       context.atts.placeholder = context.atts.placeholder || "Click to upload files or drop them here";
