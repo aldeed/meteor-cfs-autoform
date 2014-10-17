@@ -2,7 +2,7 @@
   "dependencies": [
     [
       "aldeed:autoform",
-      "4.0.0-rc2"
+      "4.0.0-rc3"
     ],
     [
       "aldeed:simple-schema",
@@ -134,7 +134,7 @@
     ],
     [
       "http",
-      "1.0.6"
+      "1.0.4"
     ],
     [
       "id-map",
@@ -237,10 +237,6 @@
       "1.0.0"
     ],
     [
-      "url",
-      "1.0.0"
-    ],
-    [
       "webapp",
       "1.1.2"
     ],
@@ -250,6 +246,6 @@
     ]
   ],
   "pluginDependencies": [],
-  "toolVersion": "meteor-tool@1.0.33",
+  "toolVersion": "meteor-tool@1.0.34",
   "format": "1.0"
 }
