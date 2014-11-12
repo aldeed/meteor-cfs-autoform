@@ -2,151 +2,55 @@
   "dependencies": [
     [
       "aldeed:autoform",
-      "4.0.0-rc3"
+      "4.0.0"
     ],
     [
       "aldeed:simple-schema",
-      "1.0.3"
-    ],
-    [
-      "application-configuration",
-      "1.0.2"
+      "1.1.0"
     ],
     [
       "base64",
-      "1.0.0"
-    ],
-    [
-      "binary-heap",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "blaze",
-      "2.0.1"
-    ],
-    [
-      "blaze-tools",
-      "1.0.0"
-    ],
-    [
-      "boilerplate-generator",
-      "1.0.0"
-    ],
-    [
-      "callback-hook",
-      "1.0.0"
-    ],
-    [
-      "cfs:access-point",
-      "0.0.0"
-    ],
-    [
-      "cfs:base-package",
-      "0.0.0"
-    ],
-    [
-      "cfs:collection",
-      "0.0.1"
-    ],
-    [
-      "cfs:collection-filters",
-      "0.0.0"
-    ],
-    [
-      "cfs:data-man",
-      "0.0.0"
-    ],
-    [
-      "cfs:file",
-      "0.0.0"
-    ],
-    [
-      "cfs:http-methods",
-      "0.0.24"
-    ],
-    [
-      "cfs:http-publish",
-      "0.0.0"
-    ],
-    [
-      "cfs:power-queue",
-      "0.0.1"
-    ],
-    [
-      "cfs:reactive-list",
-      "0.0.0"
-    ],
-    [
-      "cfs:reactive-property",
-      "0.0.0"
-    ],
-    [
-      "cfs:standard-packages",
-      "0.0.2"
-    ],
-    [
-      "cfs:storage-adapter",
-      "0.0.0"
-    ],
-    [
-      "cfs:tempstore",
-      "0.0.2"
-    ],
-    [
-      "cfs:upload-http",
-      "0.0.2"
-    ],
-    [
-      "cfs:worker",
-      "0.0.0"
+      "2.0.3"
     ],
     [
       "check",
-      "1.0.1"
+      "1.0.2"
     ],
     [
       "ddp",
-      "1.0.9"
+      "1.0.10"
     ],
     [
       "deps",
-      "1.0.4"
+      "1.0.5"
     ],
     [
       "ejson",
-      "1.0.3"
-    ],
-    [
-      "follower-livedata",
-      "1.0.1"
+      "1.0.4"
     ],
     [
       "geojson-utils",
-      "1.0.0"
-    ],
-    [
-      "html-tools",
       "1.0.1"
     ],
     [
       "htmljs",
-      "1.0.1"
-    ],
-    [
-      "http",
-      "1.0.4"
+      "1.0.2"
     ],
     [
       "id-map",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "jquery",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "json",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "livedata",
@@ -154,27 +58,15 @@
     ],
     [
       "logging",
-      "1.0.3"
+      "1.0.4"
     ],
     [
       "meteor",
-      "1.1.1"
-    ],
-    [
-      "minifiers",
-      "1.1.0"
+      "1.1.3"
     ],
     [
       "minimongo",
-      "1.0.3"
-    ],
-    [
-      "mongo",
-      "1.0.6"
-    ],
-    [
-      "mongo-livedata",
-      "1.0.5"
+      "1.0.4"
     ],
     [
       "mrt:moment",
@@ -182,15 +74,11 @@
     ],
     [
       "observe-sequence",
-      "1.0.2"
+      "1.0.3"
     ],
     [
       "ordered-dict",
-      "1.0.0"
-    ],
-    [
-      "raix:eventemitter",
-      "0.0.1"
+      "1.0.1"
     ],
     [
       "raix:ui-dropped-event",
@@ -198,35 +86,23 @@
     ],
     [
       "random",
-      "1.0.0"
-    ],
-    [
-      "reactive-var",
-      "1.0.2"
-    ],
-    [
-      "retry",
-      "1.0.0"
-    ],
-    [
-      "routepolicy",
       "1.0.1"
     ],
     [
-      "spacebars",
-      "1.0.2"
+      "reactive-var",
+      "1.0.3"
     ],
     [
-      "spacebars-compiler",
-      "1.0.2"
+      "retry",
+      "1.0.1"
     ],
     [
       "templating",
-      "1.0.7"
+      "1.0.9"
     ],
     [
       "tracker",
-      "1.0.2"
+      "1.0.3"
     ],
     [
       "ui",
@@ -234,18 +110,10 @@
     ],
     [
       "underscore",
-      "1.0.0"
-    ],
-    [
-      "webapp",
-      "1.1.2"
-    ],
-    [
-      "webapp-hashing",
-      "1.0.0"
+      "1.0.1"
     ]
   ],
   "pluginDependencies": [],
-  "toolVersion": "meteor-tool@1.0.34",
+  "toolVersion": "meteor-tool@1.0.35",
   "format": "1.0"
 }
