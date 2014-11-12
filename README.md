@@ -58,6 +58,27 @@ Files.allow({
 </template>
 ```
 
+## Schema Example
+
+If you are not able to change the `afQuickField` attributes directly or you want to use a `quickForm`, you can put the attributes in the schema instead:
+
+```js
+Docs.attachSchema(new SimpleSchema({
+  name: {
+    type: String
+  },
+  fileId: {
+    type: String,
+    autoform: {
+      afFieldInput: {
+        type: "cfs-file",
+        collection: "files"
+      }
+    }
+  }
+}));
+```
+
 ## Notes
 
 * Only insert forms (`type="insert"`) are supported
@@ -72,5 +93,6 @@ Files.allow({
 
 * Insert FS.File itself when using cfs-ejson-file package.
 * Display customizable progress bar template in place of each field while uploading.
+* Update forms
 
-[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/aldeed/)
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png)](https://gratipay.com/aldeed/)

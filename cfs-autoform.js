@@ -16,7 +16,6 @@ if (Meteor.isClient) {
   // Adds a custom "cfs-files" input type that AutoForm will recognize
   AutoForm.addInputType("cfs-files", {
     template:"cfsFilesField",
-    valueIsArray: true,
     valueOut: function () {
       return ["dummyId"];
     },
