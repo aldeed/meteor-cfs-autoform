@@ -81,10 +81,10 @@ Docs.attachSchema(new SimpleSchema({
 
 ## Server Method Example
 
-In addition to the above, on a server method
+In addition to the above, on a server method we need to reference the schema later.
 
 ```js
-var mySchema = new SimpleSchema({
+mySchema = new SimpleSchema({
   name: {
     type: String
   },
@@ -100,6 +100,7 @@ var mySchema = new SimpleSchema({
 }));
 Docs.attachSchema(mySchema);
 ```
+
 Change the html to reflect the server method type:
 ```html
 <template name="insertForm">
@@ -127,7 +128,6 @@ AutoForm.addHooks(
 ```
 
 And on the server-sde:
-
 ```js
 Meteor.methods({
   myServerMethod: function(doc) {
