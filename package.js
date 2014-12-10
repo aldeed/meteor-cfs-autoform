@@ -13,5 +13,13 @@ Package.on_use(function(api) {
   api.use('cfs:standard-packages@0.0.2', ['client', 'server'], {weak: true});
   api.use('raix:ui-dropped-event@0.0.7', 'client');
 
-  api.add_files(['cfs-autoform.html', 'cfs-autoform.js', 'cfs-autoform.css'], 'client');
+  api.export('CfsAutoForm', 'client');
+
+  api.add_files([
+    'cfs-autoform.html',
+    'cfs-autoform-hooks.js',
+    'cfs-autoform-util.js',
+    'cfs-autoform.js',
+    'cfs-autoform.css'
+  ], 'client');
 });

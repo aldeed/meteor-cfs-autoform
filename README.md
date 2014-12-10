@@ -79,9 +79,73 @@ Docs.attachSchema(new SimpleSchema({
 }));
 ```
 
+## Server Method Example
+
+In addition to the above, on a server method we need to reference the schema later.
+
+```js
+mySchema = new SimpleSchema({
+  name: {
+    type: String
+  },
+  fileId: {
+    type: String,
+    autoform: {
+      afFieldInput: {
+        type: "cfs-file",
+        collection: "files"
+      }
+    }
+  }
+}));
+Docs.attachSchema(mySchema);
+```
+
+Change the html to reflect the server method type:
+```html
+<template name="insertForm">
+  {{#autoForm id="insertForm" type="method" collection="Docs"}}
+  {{> afQuickField name="name"}}
+  {{> afQuickField name="fileId" type="cfs-file" collection="files"}}
+  <button type="submit">Submit</button>
+  {{/autoForm}}
+</template>
+```
+
+Then manually add the required AutoForm hooks to the form:
+```js
+AutoForm.addHooks(
+  ["insertForm"],
+  {
+    before   : {
+      myServerMethod: CfsAutoForm.Hooks.beforeInsert
+    },
+    after    : {
+      myServerMethod: CfsAutoForm.Hooks.afterInsert
+    }
+  }
+);
+```
+
+And on the server-sde:
+```js
+Meteor.methods({
+  myServerMethod: function(doc) {
+    try {
+      check(doc, mySchema);
+      mySchema.clean(doc);
+    }catch(e){
+      throw new Meteor.Error(e);
+    }
+
+    //do some stuff here and throw a new Meteor.Error if there is a problem
+  }});
+```
+Please note that myServerMethod, insertForm, and mySchema can (and should) be changed to whatever you like.
+
 ## Notes
 
-* Only insert forms (`type="insert"`) are supported
+* Only insert and server method forms (`type="insert"` or `type="method"`) are supported
 * Use `type="cfs-file"` to allow one file to be selected or dropped. Use `type="cfs-files"` to allow multiple files to be selected or dropped.
 * The `collection` attribute must be the same as the first argument you passed to the FS.Collection constructor.
 * Files are uploaded only after you click submit and the form is valid.
