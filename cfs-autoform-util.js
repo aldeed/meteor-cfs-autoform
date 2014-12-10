@@ -2,12 +2,12 @@ Util = {
   //delete prop from obj
   //prop can be something like "obj.3.badprop
   deepDelete: function(obj, prop){
-    return Utilities.deepDo(obj, prop, function(obj, prop){
+    return CfsAutoForm.Util.deepDo(obj, prop, function(obj, prop){
       delete obj[prop];
     });
   },
   deepSet: function(obj, prop, value){
-    return Utilities.deepDo(obj, prop, function(obj, prop){
+    return CfsAutoForm.Util.deepDo(obj, prop, function(obj, prop){
       obj[prop] = value;
     });
   },
