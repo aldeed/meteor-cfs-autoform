@@ -13,6 +13,9 @@ Package.onUse(function(api) {
   api.use('cfs:standard-packages@0.0.2', ['client', 'server'], {weak: true});
   api.use('raix:ui-dropped-event@0.0.7', 'client');
 
+  // ensure standard packages are available globally incase the user didn't `meteor add cfs:standard-packages`
+  api.imply('cfs:standard-packages')
+
   api.export('CfsAutoForm', 'client');
 
   api.add_files([
