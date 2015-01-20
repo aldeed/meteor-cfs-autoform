@@ -24,7 +24,7 @@ Add `aldeed:collection2`, `aldeed:autoform`, and `cfs:standard-packages` package
 *common.js*
 
 ```js
-Docs = new Meteor.Collection("docs");
+Docs = new Mongo.Collection("docs");
 Docs.attachSchema(new SimpleSchema({
   name: {
     type: String
