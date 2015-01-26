@@ -12,7 +12,7 @@ Util = {
     });
   },
   //returns the object that CONTAINS the last property
-  deepFind: function(obj, prop){
+  deepFind: function(obj, path){
     path = path.split('.');
     for (i = 0; i < path.length - 1; i++)
       obj = obj[path[i]];
