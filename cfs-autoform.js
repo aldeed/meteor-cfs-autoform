@@ -1,4 +1,3 @@
-
 CfsAutoForm = CfsAutoForm || {};
 CfsAutoForm.Util = Util;
 CfsAutoForm.Hooks = Hooks;
@@ -53,23 +52,30 @@ if (Meteor.isClient) {
     return {'data-schema-key': this.atts["data-schema-key"]};
   }
 
-  Template["cfsFileField_bootstrap3"].helpers({
+  Template.cfsFileField_bootstrap3.helpers({
     textInputAtts: textInputAtts,
     fileInputAtts: fileInputAtts
   });
 
-  Template["cfsFilesField_bootstrap3"].helpers({
+  Template.cfsFilesField_bootstrap3.helpers({
     textInputAtts: textInputAtts,
     fileInputAtts: fileInputAtts
   });
 
   var hookTracking = {};
-  Template["cfsFileField_bootstrap3"].rendered =
-  Template["cfsFilesField_bootstrap3"].rendered = function () {
-    var d = AutoForm.find();
+  Template.cfsFileField_bootstrap3.rendered =
+  Template.cfsFilesField_bootstrap3.rendered = function () {
+    var formId;
+
+    // backwards compatibility with pre 5.0 autoform
+    if (typeof AutoForm.find === 'function') {
+      formId = AutoForm.find().formId;
+    } else {
+      formId = AutoForm.getFormId();
+    }
+
     // By adding hooks dynamically on render, hopefully any user hooks will have
     // been added before so we won't disrupt expected behavior.
-    var formId = d.formId;
     if (!hookTracking[formId]) {
       hookTracking[formId] = true;
       addAFHook(formId);
@@ -87,7 +93,7 @@ if (Meteor.isClient) {
     template.$('.cfsaf-hidden').data("cfsaf_files", fileList);
   };
 
-  Template["cfsFileField_bootstrap3"].events({
+  Template.cfsFileField_bootstrap3.events({
     'click .cfsaf-field': function (event, template) {
       template.$('.cfsaf-hidden').click();
     },
@@ -116,7 +122,7 @@ if (Meteor.isClient) {
     template.$('.cfsaf-field').val(fullNameList.join(", "));
   };
 
-  Template["cfsFilesField_bootstrap3"].events({
+  Template.cfsFilesField_bootstrap3.events({
     'click .cfsaf-field': function (event, template) {
       template.$('.cfsaf-hidden').click();
     },

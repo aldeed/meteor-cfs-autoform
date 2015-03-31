@@ -1,6 +1,6 @@
 Hooks = {
-  beforeInsert: function (doc, template) {
-    var self = this;
+  beforeInsert: function (doc) {
+    var self = this, template = this.template;
     if (!AutoForm.validateForm(this.formId)) {
       return false;
     }
@@ -66,7 +66,7 @@ Hooks = {
       // or push it into the array of IDs if it's a multiple files field.
       else {
         if (arrayFields[key]) {
-          CfsAutoForm.Util.deepFind(doc,key).push(fileObj._id);
+          CfsAutoForm.Util.deepFind(doc,key)[key].push(fileObj._id);
         } else {
           //doc[key] = fileObj._id;
           CfsAutoForm.Util.deepSet(doc,key,fileObj._id);
@@ -140,8 +140,8 @@ Hooks = {
       });
     });
   },
-  afterInsert: function (error, result, template) {
-    var elems = template.$('.cfsaf-hidden');
+  afterInsert: function (error) {
+    var template = this.template, elems = template.$('.cfsaf-hidden');
     if (error) {
       CfsAutoForm.deleteUploadedFiles(template);
       if (FS.debug || AutoForm._debug)
