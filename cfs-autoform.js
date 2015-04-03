@@ -136,11 +136,13 @@ if (Meteor.isClient) {
         // We add a before.insert hook to upload all the files in the form.
         // This hook doesn't allow the form to continue submitting until
         // all the files are successfully uploaded.
-        insert: CfsAutoForm.Hooks.beforeInsert
+        insert: CfsAutoForm.Hooks.beforeInsert,
+        update: CfsAutoForm.Hooks.beforeUpdate
       },
       after: {
         // We add an after.insert hook to delete uploaded files if the doc insert fails.
-        insert: CfsAutoForm.Hooks.afterInsert
+        insert: CfsAutoForm.Hooks.afterInsert,
+        update: CfsAutoForm.Hooks.afterUpdate
       }
     });
   }
