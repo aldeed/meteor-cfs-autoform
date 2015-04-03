@@ -1,6 +1,6 @@
 Package.describe({
   name: "cfs:autoform",
-  version: "2.1.2",
+  version: "2.2.0",
   summary: "Upload files as part of autoform submission",
   git: "https://github.com/aldeed/meteor-cfs-autoform.git"
 });
