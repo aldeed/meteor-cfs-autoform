@@ -154,8 +154,8 @@ Hooks = {
     // cleanup uploaded files data
     elems.removeData("cfsaf_uploaded-files");
   },
-  beforeUpdate: function(_id, doc, template){
-    var self = this;
+  beforeUpdate: function(doc){
+    var self = this, template = this.template;
     if (!AutoForm.validateForm(this.formId)) {
       return false;
     }
@@ -168,9 +168,8 @@ Hooks = {
       // Get schema key that this input is for
       var key = elem.attr("data-schema-key");
 
-      // no matter what, we want to delete the dummyId value
-      //delete doc[key];
-      CfsAutoForm.Util.deepDelete(doc,key);
+      //Maintain current key
+      doc.$set[key] = self.currentDoc[key];
 
       // Get list of files that were attached for this key
       var fileList = elem.data("cfsaf_files");
@@ -179,12 +178,18 @@ Hooks = {
       if (fileList) {
         // add all files to total count
         totalFiles += fileList.length;
+        //we delete the id only if we uploaded another file
+        //delete doc[key];
+        CfsAutoForm.Util.deepDelete(doc,key);
       }
 
       // Otherwise it might be a multiple files field
       else {
         var fileListList = elem.data("cfsaf_files_multi");
         if (fileListList) {
+          //we delete the id only if we uploaded another file
+          //delete doc[key];
+          CfsAutoForm.Util.deepDelete(doc,key);
           // make a note that it's an array field
           arrayFields[key] = true;
           // add all files to total count
@@ -295,7 +300,8 @@ Hooks = {
       });
     });
   },
-  afterUpdate: function(error, result, template){
+  afterUpdate: function(error, result){
+    var template = this.template;
     var elems = template.$('.cfsaf-hidden');
     if (error) {
       CfsAutoForm.deleteUploadedFiles(template);
