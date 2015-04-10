@@ -104,7 +104,7 @@ Docs.attachSchema(mySchema);
 Change the html to reflect the server method type:
 ```html
 <template name="insertForm">
-  {{#autoForm id="insertForm" type="method" collection="Docs"}}
+  {{#autoForm id="insertForm" type="method" collection="Docs" meteormethod="myServerMethod"}}
   {{> afQuickField name="name"}}
   {{> afQuickField name="fileId" type="cfs-file" collection="files"}}
   <button type="submit">Submit</button>
@@ -118,10 +118,10 @@ AutoForm.addHooks(
   ["insertForm"],
   {
     before   : {
-      myServerMethod: CfsAutoForm.Hooks.beforeInsert
+      method: CfsAutoForm.Hooks.beforeInsert
     },
     after    : {
-      myServerMethod: CfsAutoForm.Hooks.afterInsert
+      method: CfsAutoForm.Hooks.afterInsert
     }
   }
 );
